@@ -20,7 +20,14 @@ const Header = styled.header`
   flex-direction: column;
   padding: 30px;
   span {
-    margin-top: 10px;
+    margin-top: 20px;
+    padding: 7px;
+    border: 1px solid ${(props) => props.theme.textColor};
+    border-radius: 5px;
+    transition: color 0.2s ease-in-out;
+    &:hover {
+      color: ${(props) => props.theme.accentColor};
+    }
   }
 `;
 
@@ -43,7 +50,7 @@ const Coin = styled.li`
   background-color: ${(props) => props.theme.cardBgColor};
   color: ${(props) => props.theme.textColor};
   margin: 10px 0px;
-  border: 1px solid white;
+  border: 1px solid ${(props) => props.theme.textColor};
   &:hover {
     a {
       color: ${(props) => props.theme.accentColor};
@@ -87,7 +94,7 @@ function Coins() {
       <Header>
         <Title>Coins</Title>
         <span onClick={toggleDark}>
-          {isDark ? '🌞 to Light Mode' : '🌜 to Dark Mode'}
+          {isDark ? 'Click to Light Mode 🌞' : 'Click to Dark Mode 🌜'}
         </span>
       </Header>
       {isLoading ? (

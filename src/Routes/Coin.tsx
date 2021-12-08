@@ -28,6 +28,13 @@ const Header = styled.header`
   padding: 30px;
   div {
     margin-top: 20px;
+    padding: 7px;
+    border: 1px solid ${(props) => props.theme.textColor};
+    border-radius: 5px;
+    transition: color 0.2s ease-in-out;
+    &:hover {
+      color: ${(props) => props.theme.accentColor};
+    }
   }
 `;
 
@@ -40,9 +47,10 @@ const Loader = styled.span`
   display: block;
 `;
 
-const Overview = styled.div`
+export const Overview = styled.div`
   padding: 0px 20px;
-  margin: 0 auto;
+  margin: auto;
+  margin-top: 25px;
   max-width: 600px;
   background-color: ${(props) => props.theme.textColor};
   color: ${(props) => props.theme.bgColor};
@@ -52,19 +60,22 @@ const Overview = styled.div`
   align-items: center;
 `;
 
-const OverviewItem = styled.div`
+export const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   padding: 5px;
+
   span {
     padding: 5px;
+    text-transform: uppercase;
   }
 `;
 
 const Description = styled.p`
   margin: 20px 0px;
+  line-height: 1.3;
 `;
 
 const Tabs = styled.div`
@@ -171,7 +182,7 @@ interface Whitepaper {
   thumbnail: string;
 }
 
-interface PriceData {
+export interface PriceData {
   id: string;
   name: string;
   symbol: string;
@@ -247,7 +258,7 @@ function Coin() {
           {state ? state.name : loading ? 'Loading...' : infoData?.name}
         </Title>
         <Link to="/">
-          <div> Back to Home </div>
+          <div> Back to Coin List </div>
         </Link>
       </Header>
       {loading ? (
@@ -289,7 +300,7 @@ function Coin() {
           </Tabs>
           <Switch>
             <Route path={`/${coinId}/price`}>
-              <Price />
+              <Price tickerData={tickerData} />
             </Route>
             <Route path={`/${coinId}/chart`}>
               <Chart coinId={coinId} />
