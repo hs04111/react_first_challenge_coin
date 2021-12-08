@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { fetchCoins } from '../api';
 import { isDarkAtom } from '../atom';
@@ -17,7 +17,11 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   padding: 30px;
+  span {
+    margin-top: 10px;
+  }
 `;
 
 const Title = styled.h1`
@@ -72,7 +76,7 @@ interface coinInterface {
 
 function Coins() {
   const { isLoading, data } = useQuery<coinInterface[]>('allCoins', fetchCoins);
-  const setIsDarkAtom = useSetRecoilState(isDarkAtom);
+  const [isDark, setIsDarkAtom] = useRecoilState(isDarkAtom);
   const toggleDark = () => setIsDarkAtom((current) => !current);
 
   return (
@@ -82,7 +86,9 @@ function Coins() {
       </Helmet>
       <Header>
         <Title>Coins</Title>
-        <button onClick={toggleDark}>Toggle mode</button>
+        <span onClick={toggleDark}>
+          {isDark ? '🌞 to Light Mode' : '🌜 to Dark Mode'}
+        </span>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>

@@ -233,23 +233,6 @@ function Coin() {
     { refetchInterval: 5000 },
   );
 
-  // const [loading, setLoading] = useState(true);
-  // const [info, setInfo] = useState<InfoData>();
-  // const [priceInfo, setPriceInfo] = useState<PriceData>();
-  // useEffect(() => {
-  //   (async () => {
-  //     const infoData = await (
-  //       await fetch(`https://api.coinpaprika.com/v1/coins/${coinId}`)
-  //     ).json();
-  //     const priceData = await (
-  //       await fetch(`https://api.coinpaprika.com/v1/tickers/${coinId}`)
-  //     ).json();
-  //     setInfo(infoData);
-  //     setPriceInfo(priceData);
-  //     setLoading(false);
-  //   })();
-  // }, []);
-
   const loading = infoLoading && tickerLoading;
 
   return (
@@ -264,7 +247,7 @@ function Coin() {
           {state ? state.name : loading ? 'Loading...' : infoData?.name}
         </Title>
         <Link to="/">
-          <div> &rarr; Home</div>
+          <div> Back to Home </div>
         </Link>
       </Header>
       {loading ? (
